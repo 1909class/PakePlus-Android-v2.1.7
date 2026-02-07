@@ -1,11 +1,357 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>PakePlus</title>
-    </head>
-    <body>
-        PakePlus
-    </body>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>特异视频网站</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* 头部 */
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e0e6ed;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #7f8c8d;
+        }
+        
+        /* 视频网格 */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .video-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        }
+        
+        .video-player {
+            width: 100%;
+            height: 200px;
+            background: #2c3e50;
+            position: relative;
+        }
+        
+        .video-player video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .video-controls {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+        }
+        
+        .control-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .control-btn:hover {
+            background: #2980b9;
+        }
+        
+        .download-btn {
+            background: #27ae60;
+        }
+        
+        .download-btn:hover {
+            background: #219653;
+        }
+        
+        .video-info {
+            padding: 15px;
+        }
+        
+        .video-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #2c3e50;
+        }
+        
+        .video-desc {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .video-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #7f8c8d;
+        }
+        
+        /* 页脚 */
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+            border-top: 1px solid #e0e6ed;
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .video-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>能暖气候同意影响这都市！</h1>
+            <p class="subtitle">本站视频仅供娱乐，无任何违反国家法律法规的意图，本站资源均从网络上收集，若侵犯了您的权益请联系立即联系我们，我们看到邮件会立刻删除！从本站下载所有视频请务必在24小时内删除且禁止传播，否则后果自负</p>
+        </header>
+        
+        <div class="video-grid" id="videoGrid">
+            <!-- 视频卡片将通过JavaScript动态生成 -->
+        </div>
+        
+        <footer>
+            <p>© 2026 特异视频网站 | 联系邮箱：teyi1@2529.fygt.qzz.io</p>
+        </footer>
+    </div>
+
+    <script>
+        // 视频数据
+        const videos = [
+            {
+                id: 1,
+                title: "皇后大道东 btv版",
+                description: "皇后大道东 btv版",
+                videoUrl: "/特异mv/皇后大道东 btv版.mp4"
+            },
+            {
+                id: 2,
+                title: "皇后大道东 工厂版",
+                description: "皇后大道东 工厂版",
+                videoUrl: "/特异mv/皇后大道东 工厂版.mp4"
+            },
+            {
+                id: 3,
+                title: "皇后大道东 街景版（好）",
+                description: "皇后大道东 街景版（好）",
+                videoUrl: "/特异mv/皇后大道东 街景版（好）.mp4"
+            },
+            {
+                id: 4,
+                title: "皇后大道东 街景版（损）",
+                description: "皇后大道东 街景版（损）",
+                videoUrl: "/特异mv/皇后大道东 街景版（损）.mp4"
+            },
+            {
+                id: 5,
+                title: "飞车",
+                description: "飞车",
+                videoUrl: "/特异mv/飞车.mp4"
+            },
+            {
+                id: 6,
+                title: "首都",
+                description: "首都",
+                videoUrl: "/特异mv/首都.mp4"
+            },
+            {
+                id: 7,
+                title: "亲亲表哥",
+                description: "亲亲表哥",
+                videoUrl: "/特异mv/亲亲表哥.mp4"
+            },
+            {
+                id: 8,
+                title: "京城夜",
+                description: "京城夜",
+                videoUrl: "/特异mv/京城夜.mp4"
+            },
+            {
+                id: 9,
+                title: "大家免着惊",
+                description: "大家免着惊",
+                videoUrl: "/特异mv/大家免着惊.mp4"
+            },
+            {
+                id: 10,
+                title: "大国民",
+                description: "大国民",
+                videoUrl: "/特异mv/大国民.mp4"
+            },
+        ];
+
+        // 初始化页面
+        function initPage() {
+            renderVideos();
+        }
+
+        // 渲染视频卡片
+        function renderVideos() {
+            const videoGrid = document.getElementById('videoGrid');
+            videoGrid.innerHTML = '';
+            
+            videos.forEach(video => {
+                const videoCard = document.createElement('div');
+                videoCard.className = 'video-card';
+                videoCard.innerHTML = `
+                    <div class="video-player">
+                        <video id="video-${video.id}" preload="metadata">
+                            <source src="${video.videoUrl}" type="video/mp4">
+                            您的浏览器不支持视频播放
+                        </video>
+                        <div class="video-controls">
+                            <button class="control-btn play-btn" data-id="${video.id}">
+                                ▶ 播放
+                            </button>
+                            <button class="control-btn download-btn" data-id="${video.id}">
+                                ↓ 下载
+                            </button>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">${video.title}</div>
+                        <div class="video-desc">${video.description}</div>
+                        <div class="video-meta">
+                            <span>时长: ${video.duration}</span>
+                            <span>大小: ${video.size}</span>
+                        </div>
+                    </div>
+                `;
+                
+                videoGrid.appendChild(videoCard);
+            });
+            
+            // 添加事件监听器
+            document.querySelectorAll('.play-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const videoId = this.getAttribute('data-id');
+                    playPauseVideo(videoId);
+                });
+            });
+            
+            document.querySelectorAll('.download-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const videoId = this.getAttribute('data-id');
+                    downloadVideo(videoId);
+                });
+            });
+        }
+
+        // 播放/暂停视频
+        function playPauseVideo(videoId) {
+            const video = document.getElementById(`video-${videoId}`);
+            const button = document.querySelector(`.play-btn[data-id="${videoId}"]`);
+            
+            if (video.paused) {
+                video.play();
+                button.innerHTML = '⏸ 暂停';
+                
+                // 暂停其他正在播放的视频
+                document.querySelectorAll('video').forEach(v => {
+                    if (v.id !== `video-${videoId}` && !v.paused) {
+                        v.pause();
+                        const otherBtn = document.querySelector(`.play-btn[data-id="${v.id.split('-')[1]}"]`);
+                        if (otherBtn) otherBtn.innerHTML = '▶ 播放';
+                    }
+                });
+            } else {
+                video.pause();
+                button.innerHTML = '▶ 播放';
+            }
+            
+            // 监听视频结束
+            video.onended = function() {
+                button.innerHTML = '▶ 播放';
+            };
+        }
+
+        // 下载视频
+        function downloadVideo(videoId) {
+            const video = videos.find(v => v.id == videoId);
+            if (!video) return;
+            
+            const link = document.createElement('a');
+            link.href = video.videoUrl;
+            
+            // 从URL中提取文件名，或使用默认名称
+            const urlParts = video.videoUrl.split('/');
+            const fileName = urlParts[urlParts.length - 1] || `video-${videoId}.mp4`;
+            link.download = `视频_${video.title}_${fileName}`;
+            
+            // 添加到文档，点击并移除
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            // 显示下载提示
+            alert(`正在下载: ${video.title}\n视频大小: ${video.size}`);
+        }
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', initPage);
+    </script>
+</body>
 </html>
